@@ -1,6 +1,10 @@
-import React from "react";
+'use client'
+import React, { useState } from "react";
 
-const Header = () => {
+const Header : React.FC<any> = (props) => {
+
+    
+
     return (
         <div className="navbar bg-base-100 md:px-16 py-4 shadow-[0px_6px_6px_0px_rgba(17,_12,_46,_0.15)]">
         <div className="navbar-start">
@@ -57,7 +61,7 @@ const Header = () => {
                 />
             </svg>
             </button>
-            <button className=" px-4 py-2 bg-primary text-white rounded-md">
+            <button onClick={props.handleOpen}  className="btn px-4 py-2 bg-primary text-white rounded-md">
                 Add Worker
             </button>
         </div>
