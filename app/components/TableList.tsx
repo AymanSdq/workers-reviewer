@@ -36,7 +36,6 @@ const TableList = () => {
             </tr>
             </thead>
             <tbody className="hover">
-            {/* row 1 */}
             {clientData.map( (client) => (
                 <tr key={client.id}>
                     <th>{client.name}</th>
