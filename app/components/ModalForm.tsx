@@ -1,70 +1,61 @@
-import React from 'react'
+'use client'
+import React, { useState } from 'react'
 
-const ModalForm : React.FC<any> = (props) => {
+const ModalForm : React.FC<any> = ({isOpen, onClose, mode, onSubmit}) => {
 
+  const [rate, setHandleRate] = useState({
+    name : "",
+    email : "",
+    job : "",
+    rate : 0,
+    stats : ""
+  })
+
+
+  const handleSubmit = (e : any) => {
+
+    e.preventDefault();
+
+    
+  }
+    
 
   return (
     <>
-        <dialog id="my_modal_3" className="modal" open={props.statsOpen}>
+        <dialog id="my_modal_3" className="modal" open={isOpen}>
           <div className="modal-box">
-            <form method="dialog">
-              <button onClick={props.handleClick} className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
-            </form>
-            <form action="">
+            <h3 className='font-bold text-lg py-4'>{ mode === "update" ? "Edit Client" : "Client Details" }</h3>
+            <form onSubmit={handleSubmit} method="dialog">
+              {/* if there is a button in form, it will close the modal */}
+              <button onClick={onClose} className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
               
-              <div className='w-[80%] flex gap-6 flex-col px-4 py-6'>
+              <label className="input input-bordered my-4 flex items-center gap-2">
+                Name
+                <input name='name' type="text" className="grow" />
+              </label>
+              <label className="input input-bordered my-4 flex items-center gap-2">
+                Email
+                <input name='email' type="text" className="grow" />
+              </label>
+              <label className="input input-bordered my-4 flex items-center gap-2">
+                Job
+                <input name='job' type="text" className="grow" />
+              </label>
 
-                <label className="input input-bordered flex items-center gap-2">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 16 16"
-                    fill="currentColor"
-                    className="h-4 w-4 opacity-70">
-                    <path
-                      d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM12.735 14c.618 0 1.093-.561.872-1.139a6.002 6.002 0 0 0-11.215 0c-.22.578.254 1.139.872 1.139h9.47Z" />
-                  </svg>
-                  <input name='fullName' type="text" className="grow" placeholder="Full Name" />
+              <div className="flex mb-4 gap-4 justify-between">
+
+                <label className="input input-bordered my-4 flex items-center gap-2">
+                  Rate
+                  <input name='rate' type="number" className="grow" />
                 </label>
 
-                <label className="input input-bordered flex items-center gap-2">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 16 16"
-                    fill="currentColor"
-                    className="h-4 w-4 opacity-70">
-                    <path
-                      d="M2.5 3A1.5 1.5 0 0 0 1 4.5v.793c.026.009.051.02.076.032L7.674 8.51c.206.1.446.1.652 0l6.598-3.185A.755.755 0 0 1 15 5.293V4.5A1.5 1.5 0 0 0 13.5 3h-11Z" />
-                    <path
-                      d="M15 6.954 8.978 9.86a2.25 2.25 0 0 1-1.956 0L1 6.954V11.5A1.5 1.5 0 0 0 2.5 13h11a1.5 1.5 0 0 0 1.5-1.5V6.954Z" />
-                  </svg>
-                  <input name='email' type="text" className="grow" placeholder="Email" />
-                </label>
-
-                <label className="input w-full input-bordered flex items-center gap-2">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 16 16"
-                    fill="currentColor"
-                    className="h-4 w-4 opacity-70">
-                    <path
-                      d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM12.735 14c.618 0 1.093-.561.872-1.139a6.002 6.002 0 0 0-11.215 0c-.22.578.254 1.139.872 1.139h9.47Z" />
-                  </svg>
-                  <input name='job' type="text" className="grow" placeholder="Job" />
-                </label>
-
-                <div className='w-full flex gap-5'>
-
-                  <label className="input w-1/2 input-bordered flex items-center gap-2">
-                    <input name='age' type="number" className="grow" placeholder="Age" />
-                  </label>
-                  
-                  <label className="input w-1/2 input-bordered flex items-center gap-2">
-                    <input name='job' type="text" className="grow" placeholder="Job" />
-                  </label>
-                </div>
-
+                <select name='stats' className="select my-4 select-bordered w-full max-w-xs">
+                  <option value="innactive">Inactive</option>
+                  <option value="active" >Active</option>
+                </select>
               </div>
 
+              <button className='btn btn-success'>{ mode === "update" ? "Save Changes" : "Create User" }</button>
             </form>
           </div>
         </dialog>

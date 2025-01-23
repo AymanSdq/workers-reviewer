@@ -1,8 +1,8 @@
-import React from "react";
 
-const TableList = () => {
+import React  from "react";
 
-    
+const TableList : React.FC<any> = ({onOpen}) => {
+
     interface clientArray {
         id : number,
         name : string,
@@ -31,7 +31,7 @@ const TableList = () => {
                 <th>Full Name</th>
                 <th>Email</th>
                 <th>Job</th>
-                <th>Age</th>
+                <th>Rate</th>
                 <th>Active</th>
             </tr>
             </thead>
@@ -49,7 +49,7 @@ const TableList = () => {
                     }</td>
 
                     <td>
-                        <button className="btn btn-secondary">Update</button>
+                        <button onClick={onOpen} className="btn btn-secondary">Update</button>
                     </td>
                     <td>
                         <button className="btn btn-error">Delete</button>

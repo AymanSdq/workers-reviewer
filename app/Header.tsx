@@ -1,7 +1,6 @@
 
-const Header : React.FC<any> = (props) => {
+const Header : React.FC<any> = ({onOpen}) => {
 
-    
 
     return (
         <div className="navbar bg-base-100 md:px-16 py-4 shadow-[0px_6px_6px_0px_rgba(17,_12,_46,_0.15)]">
@@ -59,7 +58,7 @@ const Header : React.FC<any> = (props) => {
                 />
             </svg>
             </button>
-            <button onClick={props.handleOpen}  className="btn px-4 py-2 bg-primary text-white rounded-md">
+            <button onClick={onOpen}  className="btn px-4 py-2 bg-primary text-white rounded-md">
                 Add Worker
             </button>
         </div>
