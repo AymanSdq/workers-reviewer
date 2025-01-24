@@ -1,9 +1,18 @@
 'use client'
 import React, { useState } from 'react'
 
+
+interface addClient {
+  name : string,
+  email : string,
+  job : string,
+  rate : number,
+  stats : string;
+}
+
 const ModalForm : React.FC<any> = ({isOpen, onClose, mode, onSubmit}) => {
 
-  const [rate, setHandleRate] = useState({
+  const [clientRate, setClientRate] = useState<addClient>({
     name : "",
     email : "",
     job : "",
@@ -11,13 +20,24 @@ const ModalForm : React.FC<any> = ({isOpen, onClose, mode, onSubmit}) => {
     stats : ""
   })
 
+  const handleChange = (e : React.ChangeEvent<HTMLInputElement | HTMLSelectElement> ) => {
 
-  const handleSubmit = (e : any) => {
+    const {name , value } = e.target;
 
-    e.preventDefault();
+    setClientRate( (prevElement) => ({
+        ...prevElement,
+        [name] : value
+      }))
 
-    
   }
+
+  const handleSubmit = () => {
+    console.log(clientRate)
+    onClose()
+  }
+
+
+
     
 
   return (
@@ -31,25 +51,25 @@ const ModalForm : React.FC<any> = ({isOpen, onClose, mode, onSubmit}) => {
               
               <label className="input input-bordered my-4 flex items-center gap-2">
                 Name
-                <input name='name' type="text" className="grow" />
+                <input name='name' onChange={handleChange} value={clientRate.name} type="text" className="grow" />
               </label>
               <label className="input input-bordered my-4 flex items-center gap-2">
                 Email
-                <input name='email' type="text" className="grow" />
+                <input name='email' onChange={handleChange} value={clientRate.email} type="text" className="grow" />
               </label>
               <label className="input input-bordered my-4 flex items-center gap-2">
                 Job
-                <input name='job' type="text" className="grow" />
+                <input name='job' onChange={handleChange} value={clientRate.job} type="text" className="grow" />
               </label>
 
               <div className="flex mb-4 gap-4 justify-between">
 
                 <label className="input input-bordered my-4 flex items-center gap-2">
                   Rate
-                  <input name='rate' type="number" className="grow" />
+                  <input name='rate' onChange={handleChange} value={clientRate.rate} type="number" className="grow" />
                 </label>
 
-                <select name='stats' className="select my-4 select-bordered w-full max-w-xs">
+                <select name='stats' onChange={handleChange} className="select my-4 select-bordered w-full max-w-xs">
                   <option value="innactive">Inactive</option>
                   <option value="active" >Active</option>
                 </select>
