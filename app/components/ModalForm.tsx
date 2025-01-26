@@ -7,7 +7,7 @@ interface addClient {
   email : string,
   job : string,
   rate : number,
-  stats : string;
+  stats : boolean;
 }
 
 const ModalForm : React.FC<any> = ({isOpen, onClose, mode, onSubmit}) => {
@@ -17,7 +17,7 @@ const ModalForm : React.FC<any> = ({isOpen, onClose, mode, onSubmit}) => {
     email : "",
     job : "",
     rate : 0,
-    stats : ""
+    stats : false
   })
 
   const handleChange = (e : React.ChangeEvent<HTMLInputElement | HTMLSelectElement> ) => {
@@ -30,6 +30,8 @@ const ModalForm : React.FC<any> = ({isOpen, onClose, mode, onSubmit}) => {
       }))
 
   }
+
+  // Searching for API callers 
 
   const handleSubmit = () => {
     console.log(clientRate)
@@ -70,8 +72,8 @@ const ModalForm : React.FC<any> = ({isOpen, onClose, mode, onSubmit}) => {
                 </label>
 
                 <select name='stats' onChange={handleChange} className="select my-4 select-bordered w-full max-w-xs">
-                  <option value="innactive">Inactive</option>
-                  <option value="active" >Active</option>
+                  <option value="false">Inactive</option>
+                  <option value="true" >Active</option>
                 </select>
               </div>
 
