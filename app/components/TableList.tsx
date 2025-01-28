@@ -31,7 +31,17 @@ const TableList : React.FC<any> = ({onOpen}) => {
         isactive : boolean
     }
 
-    console.log(tableData)
+    const deleteClient = async (id : number)  =>  {
+        try {
+            const deleteClient = await axios.delete(`http://localhost:3002/api/deleteclient/${id}`)
+            .then( (result) => {
+                console.log("Deleted Successfully")
+            })
+        } catch (error) {
+            
+        }
+    }
+
 
     return (
         <div className="overflow-x-auto my-10 px-16">
@@ -63,7 +73,7 @@ const TableList : React.FC<any> = ({onOpen}) => {
                         <button onClick={onOpen} className="btn btn-secondary">Update</button>
                     </td>
                     <td>
-                        <button className="btn btn-error">Delete</button>
+                        <button onClick={() => deleteClient(client.id)}  className="btn btn-error">Delete</button>
                     </td>
                 </tr>
             ) )}
