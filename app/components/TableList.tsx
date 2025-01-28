@@ -28,9 +28,10 @@ const TableList : React.FC<any> = ({onOpen}) => {
         age : number,
         job : string,
         rate : number,
-        isActive : boolean
+        isactive : boolean
     }
 
+    console.log(tableData)
 
     return (
         <div className="overflow-x-auto my-10 px-16">
@@ -52,7 +53,7 @@ const TableList : React.FC<any> = ({onOpen}) => {
                     <td>{client.email}</td>
                     <td>{client.job}</td>
                     <td>{client.rate}</td>
-                    <td>{ client.isActive ? 
+                    <td>{ client.isactive ? 
                         <button className="btn rounded-md bg-primary w-20"> Active </button>    
                         :
                         <button className="btn rounded-md btn-outline btn-primary w-20"> Not Active </button>
