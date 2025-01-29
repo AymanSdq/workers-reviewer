@@ -2,7 +2,18 @@
 import axios from "axios";
 import React, { useEffect, useState }  from "react";
 
-const TableList : React.FC<any> = ({onOpen}) => {
+
+interface clientArray {
+    id : number,
+    name : string,
+    email : string,
+    age : number,
+    job : string,
+    rate : number,
+    isactive : boolean
+}
+
+const TableList : React.FC<any> = ({onOpen, searchTerm}) => {
 
     const [tableData , setTableData] = useState([]);
     const [errorData , setErrorData] = useState(null)
@@ -17,20 +28,11 @@ const TableList : React.FC<any> = ({onOpen}) => {
                 
             }
         }
-
         fetchData();
     } , [])
 
-    interface clientArray {
-        id : number,
-        name : string,
-        email : string,
-        age : number,
-        job : string,
-        rate : number,
-        isactive : boolean
-    }
 
+    // Function to delete
     const deleteClient = async (id : number)  =>  {
         try {
             const deleteClient = await axios.delete(`http://localhost:3002/api/deleteclient/${id}`)
@@ -42,6 +44,13 @@ const TableList : React.FC<any> = ({onOpen}) => {
         }
     }
 
+
+    // Filtering the data
+    const filteredData = tableData.filter((client : clientArray)  => 
+        client.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        client.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        client.job.toLowerCase().includes(searchTerm.toLowerCase())
+    )
 
     return (
         <div className="overflow-x-auto my-10 px-16">
@@ -57,7 +66,7 @@ const TableList : React.FC<any> = ({onOpen}) => {
             </tr>
             </thead>
             <tbody className="hover">
-            {tableData.map( (client : clientArray) => (
+            {filteredData.map( (client : clientArray) => (
                 <tr key={client.id}>
                     <th>{client.name}</th>
                     <td>{client.email}</td>

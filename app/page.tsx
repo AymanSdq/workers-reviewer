@@ -3,11 +3,13 @@ import TableList from "./components/TableList";
 import ModalForm from "./components/ModalForm";
 import { useState } from "react";
 import Header from "./Header";
+import axios from "axios";
 
 export default function Home() {
 
   const [isOpen, setIsOpen] = useState(false)
   const [modalMode, setmodalMode] = useState('')
+  const [searchTerm, setSearchTerm] = useState('')
 
   const handleOpen = (mode : string) => {
     setIsOpen(true);
@@ -26,8 +28,8 @@ export default function Home() {
 
   return (
     <>
-      <Header onOpen={ () => handleOpen('add')} />
-      <TableList  onOpen={ () => handleOpen('update')} />
+      <Header onOpen={ () => handleOpen('add')} onSearch={setSearchTerm} />
+      <TableList  onOpen={ () => handleOpen('update')} searchTerm={searchTerm} />
       <ModalForm 
         isOpen={isOpen} onSubmit={handleSubmit} 
         onClose={() => setIsOpen(false) } mode={modalMode} />
