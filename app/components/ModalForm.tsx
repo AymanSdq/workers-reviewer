@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 
 interface addClient {
@@ -10,7 +10,7 @@ interface addClient {
   stats : boolean;
 }
 
-const ModalForm : React.FC<any> = ({isOpen, onClose, mode, onSubmit}) => {
+const ModalForm : React.FC<any> = ({isOpen, onClose, mode, makeSubmit, clientData}) => {
 
   const [clientRate, setClientRate] = useState<addClient>({
     name : "",
@@ -33,12 +33,22 @@ const ModalForm : React.FC<any> = ({isOpen, onClose, mode, onSubmit}) => {
 
   // Searching for API callers 
 
-  const handleSubmit = () => {
-    console.log(clientRate)
+  const handleSubmit = async(event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    try{
+      await makeSubmit(clientRate)
+      onClose();
+    }catch(err){
+
+    }
     onClose()
   }
 
-
+  useEffect( () => {
+    if(mode === "update" && clientData){
+      setClientRate(clientRate)
+    }
+  }, [mode, clientData] )
 
     
 
