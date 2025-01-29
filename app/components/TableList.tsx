@@ -13,7 +13,7 @@ interface clientArray {
     isactive : boolean
 }
 
-const TableList : React.FC<any> = ({onOpen, searchTerm}) => {
+const TableList : React.FC<any> = ({handleOpen, searchTerm}) => {
 
     const [tableData , setTableData] = useState([]);
     const [errorData , setErrorData] = useState(null)
@@ -79,7 +79,7 @@ const TableList : React.FC<any> = ({onOpen, searchTerm}) => {
                     }</td>
 
                     <td>
-                        <button onClick={onOpen} className="btn btn-secondary">Update</button>
+                        <button onClick={() => handleOpen("update", client)} className="btn btn-secondary">Update</button>
                     </td>
                     <td>
                         <button onClick={() => deleteClient(client.id)}  className="btn btn-error">Delete</button>

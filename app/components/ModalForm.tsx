@@ -46,7 +46,8 @@ const ModalForm : React.FC<any> = ({isOpen, onClose, mode, makeSubmit, clientDat
 
   useEffect( () => {
     if(mode === "update" && clientData){
-      setClientRate(clientRate)
+      setClientRate(clientData)
+      
     }
   }, [mode, clientData] )
 
@@ -57,31 +58,30 @@ const ModalForm : React.FC<any> = ({isOpen, onClose, mode, makeSubmit, clientDat
         <dialog id="my_modal_3" className="modal" open={isOpen}>
           <div className="modal-box">
             <h3 className='font-bold text-lg py-4'>{ mode === "update" ? "Edit Client" : "Client Details" }</h3>
+            <button onClick={onClose} className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
             <form onSubmit={handleSubmit} method="dialog">
               {/* if there is a button in form, it will close the modal */}
-              <button onClick={onClose} className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
-              
               <label className="input input-bordered my-4 flex items-center gap-2">
-                Name
-                <input name='name' onChange={handleChange} value={clientRate.name} type="text" className="grow" />
+                Name 
+                <input name='name'  onChange={handleChange} value={clientRate.name} type="text" className="grow" required/>
               </label>
               <label className="input input-bordered my-4 flex items-center gap-2">
                 Email
-                <input name='email' onChange={handleChange} value={clientRate.email} type="text" className="grow" />
+                <input name='email' onChange={handleChange} value={clientRate.email} type="text" className="grow" required/>
               </label>
               <label className="input input-bordered my-4 flex items-center gap-2">
                 Job
-                <input name='job' onChange={handleChange} value={clientRate.job} type="text" className="grow" />
+                <input name='job' onChange={handleChange} value={clientRate.job} type="text" className="grow" required/>
               </label>
 
               <div className="flex mb-4 gap-4 justify-between">
 
                 <label className="input input-bordered my-4 flex items-center gap-2">
                   Rate
-                  <input name='rate' onChange={handleChange} value={clientRate.rate} type="number" className="grow" />
+                  <input name='rate' onChange={handleChange} value={clientRate.rate} type="number" className="grow" required/>
                 </label>
 
-                <select name='stats' onChange={handleChange} className="select my-4 select-bordered w-full max-w-xs">
+                <select name='stats' onChange={handleChange} className="select my-4 select-bordered w-full max-w-xs" required> 
                   <option value="false">Inactive</option>
                   <option value="true" >Active</option>
                 </select>

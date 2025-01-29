@@ -13,6 +13,11 @@ interface addClient {
   stats : boolean;
 }
 
+interface updateClient extends addClient {
+  id : string,
+}
+
+
 
 
 export default function Home() {
@@ -20,9 +25,15 @@ export default function Home() {
   const [isOpen, setIsOpen] = useState(false)
   const [modalMode, setmodalMode] = useState('')
   const [searchTerm, setSearchTerm] = useState('')
-  const [clientData, setClientData] = useState(null)
+  const [clientData, setClientData] = useState<updateClient | null>(null);
 
-  const handleOpen = (mode : string) => {
+  const handleOpen = (mode : string, client : updateClient) => {
+    setClientData(client)
+    setIsOpen(true);
+    setmodalMode(mode);
+  }
+
+  const handleOpenOne = (mode : string) => {
     setIsOpen(true);
     setmodalMode(mode);
   }
@@ -35,14 +46,21 @@ export default function Home() {
         console.log(error)
       }
     }else {
-      console.log("Modal mode is Update")
+
+      try {
+        const response = await axios.put(`http://localhost:3002/api/updateclient/${clientData?.id}`, newClientData);
+      } catch (error) {
+        console.log(error)
+      }
+
     }
   }
 
+  
   return (
     <>
-      <Header onOpen={ () => handleOpen('add')} onSearch={setSearchTerm} />
-      <TableList  onOpen={ () => handleOpen('update')} searchTerm={searchTerm} />
+      <Header onOpen={ () => handleOpenOne('add')} onSearch={setSearchTerm} />
+      <TableList handleOpen={handleOpen} searchTerm={searchTerm} />
       <ModalForm 
         isOpen={isOpen} makeSubmit={handleSubmit} 
         onClose={() => setIsOpen(false) } mode={modalMode} clientData={clientData} />
